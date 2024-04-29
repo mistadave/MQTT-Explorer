@@ -1,6 +1,7 @@
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -11,6 +12,16 @@ module.exports = {
     chunkFilename: '[name].bundle.js',
     filename: '[name].bundle.js',
     path: `${__dirname}/build`,
+  },
+  resolve: {
+    plugins: [
+      PnpWebpackPlugin,
+    ],
+  },
+  resolveLoader: {
+    plugins: [
+      PnpWebpackPlugin.moduleLoader(module),
+    ],
   },
   optimization: {
     minimize: false,
